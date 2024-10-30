@@ -1,0 +1,23 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Django secret key and environment variables
+.env
+
+# Local environment settings
+*.local
+
+# Database files
+db.sqlite3
+
+# Media files
+media/
+
+# Static files
+staticfiles/
+
+# Virtual environment
+venv/
+.venv/
+env/
