@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == 'True'
 
-ALLOWED_HOSTS = ['yourappname.up.railway.app', 'localhost']
+ALLOWED_HOSTS = ['portfoliobackend-production-8f40.up.railway.app', 'localhost']
 
 
 
