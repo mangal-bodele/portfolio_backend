@@ -49,7 +49,7 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # Django backend URL in development
-    "http://localhost:3000",  # Frontend URL (e.g., React running locally)
+    "https://mangalbodele.netlify.app/",  # Frontend URL (e.g., React running locally)
 ]
 
 
@@ -78,16 +78,24 @@ WSGI_APPLICATION = 'my_portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+from urllib.parse import urlparse
+
+DATABASE_URL = os.getenv('DATABASE_URL', 'mysql://root:vjbuoiQdFQYaFQzRPhXPbfyzXTcIdQUL@junction.proxy.rlwy.net:29887/railway')
+
+db_config = urlparse(DATABASE_URL)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Use 'django.db.backends.mysql'
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': db_config.path[1:],  # Removing the leading slash
+        'USER': db_config.username,
+        'PASSWORD': db_config.password,
+        'HOST': db_config.hostname,
+        'PORT': db_config.port,
     }
 }
+
 
 
 # Password validation
