@@ -40,6 +40,26 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# URL to access static files
+STATIC_URL = '/static/'
+
+# Path to where static files will be collected
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Use Whitenoise for serving static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Optional: Enable static file compression (Whitenoise does this automatically)
+WHITENOISE_AUTOREFRESH = True  # For local development (if you change files on the fly)
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -127,12 +147,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
