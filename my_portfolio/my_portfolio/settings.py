@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -16,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG") == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -47,9 +48,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",  # Django backend URL in development
-    "https://mangalbodele.netlify.app/",  # Frontend URL (e.g., React running locally)
+CORS_ALLOWED_ORIGINS = [  # Django backend URL in development
+    "https://mangalbodele.netlify.app",  # Frontend URL (e.g., React running locally)
 ]
 
 
@@ -78,25 +78,9 @@ WSGI_APPLICATION = 'my_portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
-from urllib.parse import urlparse
-
-DATABASE_URL = os.getenv('DATABASE_URL', 'mysql://root:vjbuoiQdFQYaFQzRPhXPbfyzXTcIdQUL@junction.proxy.rlwy.net:29887/railway')
-
-db_config = urlparse(DATABASE_URL)
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': db_config.path[1:],  # Removing the leading slash
-        'USER': db_config.username,
-        'PASSWORD': db_config.password,
-        'HOST': db_config.hostname,
-        'PORT': db_config.port,
-    }
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL'), conn_max_age=600, ssl_require=False)
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
