@@ -19,7 +19,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == 'True'
 
-ALLOWED_HOSTS = ['portfoliobackend-production-8f40.up.railway.app', 'localhost']
+ALLOWED_HOST = ['*']
 
 
 
@@ -40,23 +40,11 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# URL to access static files
 STATIC_URL = '/static/'
 
-# Path to where static files will be collected
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Use Whitenoise for serving static files in production
+# Static files settings for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-# Optional: Enable static file compression (Whitenoise does this automatically)
-WHITENOISE_AUTOREFRESH = True  # For local development (if you change files on the fly)
 
 
 

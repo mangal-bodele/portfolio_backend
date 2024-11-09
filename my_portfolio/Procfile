@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn my_portfolio.wsgi:application --bind 0.0.0.0:8000 --log-file -
+web: gunicorn ‘my_portfolio.wsgi’
