@@ -42,6 +42,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
+    'https://mangalbodele.netlify.app/'
 ]
 
 ROOT_URLCONF = 'my_portfolio.urls'
